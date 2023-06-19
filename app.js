@@ -100,7 +100,7 @@ function searchF(event) {
 }
 //Get wind speed
 function displayWindSpeed(response) {
-  let windSpeed = response.data.wind.speed;
+  let windSpeed = Math.round(response.data.wind.speed);
   let hWindSpeed = document.querySelector(".wind-speed");
   hWindSpeed.innerHTML = `${windSpeed} mph`;
 }
@@ -228,7 +228,6 @@ function getsvgkey(key) {
   }
 }
 function displayMainIcon(response) {
-  console.log(":)");
   let svgkey = getsvgkey(response.data.weather[0].description);
   const svgcontent = getsvgcontent(svgkey);
   let mainIcon = document.querySelector(".current-icon-container");
@@ -242,7 +241,7 @@ function getMainIcon(event) {
   axios.get(apiUrl).then(displayMainIcon);
 }
 
-//
+// Event Listeners <3
 userLocation.addEventListener("submit", search);
 userLocation.addEventListener("submit", getWeatherInfo);
 userLocation.addEventListener("submit", searchF);
@@ -267,8 +266,20 @@ function retreivePosition(position) {
   axios.get(apiUrl).then(displayCurrentTemp);
 }
 function getCurrentPosition(event) {
-  // event.preventDefault();
+  event.preventDefault();
   navigator.geolocation.getCurrentPosition(retreivePosition);
 }
 let button = document.querySelector("button");
 button.addEventListener("click", getCurrentPosition);
+// Default Data
+function defaultLoad() {
+  let dummyEvt = new Event("submit");
+  document.getElementById("city-name").value = "New York";
+  cityInput(dummyEvt);
+  search(dummyEvt);
+  getWeatherInfo(dummyEvt);
+  searchF(dummyEvt);
+  getWindSpeed(dummyEvt);
+  getMainIcon(dummyEvt);
+}
+window.addEventListener("load", defaultLoad);

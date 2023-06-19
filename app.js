@@ -34,7 +34,22 @@ function cityInput(event) {
 let userLocation = document.querySelector("form");
 userLocation.addEventListener("submit", cityInput);
 
-// Get temp from location
+//Displays weather description from search
+function displayWeatherInfo(response) {
+  console.log(response);
+  let weatherInfo = response.data.weather[0].description;
+  let weatherDescription = document.querySelector(".weather-description");
+  weatherDescription.innerHTML = `${weatherInfo}`;
+}
+function getWeatherInfo(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#city-name");
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayWeatherInfo);
+}
+
+// Get temp C from location
 function getTemperature(response) {
   let prettyTemp = Math.round(response.data.main.temp);
   let temperature = document.querySelector(".temp-C");
@@ -48,8 +63,38 @@ function search(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(getTemperature);
 }
+// Get temp F from location
+function getFTemperature(response) {
+  let prettyFTemp = Math.round(response.data.main.temp);
+  let fTemperature = document.querySelector(".temp-F");
+  fTemperature.innerHTML = `${prettyFTemp}&degF |`;
+}
+function searchF(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#city-name");
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(getFTemperature);
+}
+//Get wind speed
+function displayWindSpeed(response) {
+  let windSpeed = response.data.wind.speed;
+  let hWindSpeed = document.querySelector(".wind-speed");
+  hWindSpeed.innerHTML = `${windSpeed} mph`;
+}
+function getWindSpeed(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#city-name");
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayWindSpeed);
+}
 userLocation.addEventListener("submit", search);
-
+userLocation.addEventListener("submit", getWeatherInfo);
+userLocation.addEventListener("submit", searchF);
+userLocation.addEventListener("submit", getWindSpeed);
 // Get current temp based on location data
 function displayCurrentTemp(response) {
   let cleanTemp = Math.round(response.data.main.temp);
@@ -69,7 +114,7 @@ function retreivePosition(position) {
   axios.get(apiUrl).then(displayCurrentTemp);
 }
 function getCurrentPosition(event) {
-  event.preventDefault();
+  // event.preventDefault();
   navigator.geolocation.getCurrentPosition(retreivePosition);
 }
 let button = document.querySelector("button");

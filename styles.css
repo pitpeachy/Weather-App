@@ -6,8 +6,7 @@ body {
   background-color: #fff;
 }
 .main-content {
-  height: 100vh;
-  width: 45vw;
+  width: 600px;
   background-color: #b3e5f2;
   margin: 30px;
   border-radius: 20px;
@@ -20,7 +19,8 @@ h1 {
   display: inline-block;
 }
 /* Main Animated Icon */
-.main-icon {
+
+.current-icon-container > svg {
   width: 200px;
   height: 200px;
   margin: 20px auto;

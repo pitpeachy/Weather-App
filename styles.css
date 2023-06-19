@@ -6,15 +6,18 @@ body {
   background-color: #fff;
 }
 .main-content {
-  height: 90vh;
-  width: 35vw;
+  height: 100vh;
+  width: 45vw;
   background-color: #b3e5f2;
   margin: 30px;
   border-radius: 20px;
   position: relative;
 }
+.weather-description {
+  padding-bottom: 5px;
+}
 h1 {
-  display: inline;
+  display: inline-block;
 }
 /* Main Animated Icon */
 .main-icon {

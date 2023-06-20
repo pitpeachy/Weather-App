@@ -433,8 +433,8 @@ userLocation.addEventListener("submit", getDay3Icon);
 userLocation.addEventListener("submit", getDay4Icon);
 userLocation.addEventListener("submit", getDay5Icon);
 
-// Get current temp based on location data
-function displayCurrentTemp(response) {
+// Get C temp and shows city name based on location data
+function displayCurrentPositionTempC(response) {
   let cleanTemp = Math.round(response.data.main.temp);
   let temperature = document.querySelector(".temp-C");
   temperature.innerHTML = `${cleanTemp}&degC`;
@@ -442,19 +442,232 @@ function displayCurrentTemp(response) {
   let currentCity = document.querySelector(".location");
   currentCity.innerHTML = `${city}`;
 }
-function retreivePosition(position) {
+function getCurrentPositionTempC(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
   let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
 
-  axios.get(apiUrl).then(displayCurrentTemp);
+  axios.get(apiUrl).then(displayCurrentPositionTempC);
 }
+//Get F Temp based on location Data
+function displayCurrentPositionTempF(response) {
+  let cleanTemp = Math.round(response.data.main.temp);
+  let temperature = document.querySelector(".temp-F");
+  temperature.innerHTML = `${cleanTemp}&degF |`;
+}
+function getCurrentPositionTempF(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+
+  axios.get(apiUrl).then(displayCurrentPositionTempF);
+}
+//Displays weather description from location data
+function displayCurrentWeatherInfo(response) {
+  let weatherInfo = response.data.weather[0].description;
+  let weatherDescription = document.querySelector(".weather-description");
+  weatherDescription.innerHTML = `${weatherInfo}`;
+}
+function getCurrentWeatherInfo(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayCurrentWeatherInfo);
+}
+//Get wind speed
+function displayCurrentWindSpeed(response) {
+  let windSpeed = Math.round(response.data.wind.speed);
+  let hWindSpeed = document.querySelector(".wind-speed");
+  hWindSpeed.innerHTML = `${windSpeed} mph`;
+}
+function getCurrentWindSpeed(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayCurrentWindSpeed);
+}
+//Replaces main icon based on location
+function displayMainIconCurrent(response) {
+  let svgkey = getsvgkey(response.data.weather[0].description);
+  const svgcontent = getsvgcontent(svgkey);
+  let mainIcon = document.querySelector(".current-icon-container");
+  mainIcon.innerHTML = svgcontent;
+}
+function getMainIconCurrent(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayMainIconCurrent);
+}
+//5 DAY FORECAST TEMPS CURRENT LOCATION ONLY
+function displayCurrentDay1TempF(response) {
+  let day1TempF = Math.round(response.data.list[0].main.temp);
+  let displayDay1TempF = document.querySelector(".week-temp-1");
+  displayDay1TempF.innerHTML = `${day1TempF}&degF`;
+}
+function getCurrentDay1TempF(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayCurrentDay1TempF);
+}
+//
+function displayCurrentDay2TempF(response) {
+  let day2TempF = Math.round(response.data.list[2].main.temp);
+  let displayDay2TempF = document.querySelector(".week-temp-2");
+  displayDay2TempF.innerHTML = `${day2TempF}&degF`;
+}
+function getCurrentDay2TempF(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayCurrentDay2TempF);
+}
+//
+function displayCurrentDay3TempF(response) {
+  let day3TempF = Math.round(response.data.list[10].main.temp);
+  let displayDay3TempF = document.querySelector(".week-temp-3");
+  displayDay3TempF.innerHTML = `${day3TempF}&degF`;
+}
+function getCurrentDay3TempF(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayCurrentDay3TempF);
+}
+//
+function displayCurrentDay4TempF(response) {
+  let day4TempF = Math.round(response.data.list[18].main.temp);
+  let displayDay4TempF = document.querySelector(".week-temp-4");
+  displayDay4TempF.innerHTML = `${day4TempF}&degF`;
+}
+function getCurrentDay4TempF(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayCurrentDay4TempF);
+}
+//
+function displayCurrentDay5TempF(response) {
+  let day5TempF = Math.round(response.data.list[26].main.temp);
+  let displayDay5TempF = document.querySelector(".week-temp-5");
+  displayDay5TempF.innerHTML = `${day5TempF}&degF`;
+}
+function getCurrentDay5TempF(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayCurrentDay5TempF);
+}
+//5 DAY ICONS CURRENT LOCATION ONLY
+function displayCurrentDay1Icon(response) {
+  let svgkey = getsvgkey(response.data.list[0].weather[0].description);
+  const svgcontent = getsvgcontent(svgkey);
+  let day1Icon = document.querySelector(".day1-icon-container");
+  day1Icon.innerHTML = svgcontent;
+}
+function getCurrentDay1Icon(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayCurrentDay1Icon);
+}
+//
+function displayCurrentDay2Icon(response) {
+  let svgkey = getsvgkey(response.data.list[2].weather[0].description);
+  const svgcontent = getsvgcontent(svgkey);
+  let day2Icon = document.querySelector(".day2-icon-container");
+  day2Icon.innerHTML = svgcontent;
+}
+function getCurrentDay2Icon(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayCurrentDay2Icon);
+}
+//
+function displayCurrentDay3Icon(response) {
+  let svgkey = getsvgkey(response.data.list[10].weather[0].description);
+  const svgcontent = getsvgcontent(svgkey);
+  let day3Icon = document.querySelector(".day3-icon-container");
+  day3Icon.innerHTML = svgcontent;
+}
+function getCurrentDay3Icon(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayCurrentDay3Icon);
+}
+//
+function displayCurrentDay4Icon(response) {
+  let svgkey = getsvgkey(response.data.list[18].weather[0].description);
+  const svgcontent = getsvgcontent(svgkey);
+  let day4Icon = document.querySelector(".day4-icon-container");
+  day4Icon.innerHTML = svgcontent;
+}
+function getCurrentDay4Icon(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayCurrentDay4Icon);
+}
+//
+function displayCurrentDay5Icon(response) {
+  let svgkey = getsvgkey(response.data.list[26].weather[0].description);
+  const svgcontent = getsvgcontent(svgkey);
+  let day5Icon = document.querySelector(".day5-icon-container");
+  day5Icon.innerHTML = svgcontent;
+}
+function getCurrentDay5Icon(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayCurrentDay5Icon);
+}
+//Where all current position functions get their position from
 function getCurrentPosition(event) {
   event.preventDefault();
-  navigator.geolocation.getCurrentPosition(retreivePosition);
+  navigator.geolocation.getCurrentPosition(getCurrentPositionTempC);
+  navigator.geolocation.getCurrentPosition(getCurrentPositionTempF);
+  navigator.geolocation.getCurrentPosition(getCurrentWeatherInfo);
+  navigator.geolocation.getCurrentPosition(getCurrentWindSpeed);
+  navigator.geolocation.getCurrentPosition(getMainIconCurrent);
+  navigator.geolocation.getCurrentPosition(getCurrentDay1TempF);
+  navigator.geolocation.getCurrentPosition(getCurrentDay2TempF);
+  navigator.geolocation.getCurrentPosition(getCurrentDay3TempF);
+  navigator.geolocation.getCurrentPosition(getCurrentDay4TempF);
+  navigator.geolocation.getCurrentPosition(getCurrentDay5TempF);
+  navigator.geolocation.getCurrentPosition(getCurrentDay1Icon);
+  navigator.geolocation.getCurrentPosition(getCurrentDay2Icon);
+  navigator.geolocation.getCurrentPosition(getCurrentDay3Icon);
+  navigator.geolocation.getCurrentPosition(getCurrentDay4Icon);
+  navigator.geolocation.getCurrentPosition(getCurrentDay5Icon);
 }
+
+//Current Position Event Listener
 let button = document.querySelector("button");
 button.addEventListener("click", getCurrentPosition);
 

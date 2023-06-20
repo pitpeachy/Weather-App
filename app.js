@@ -33,7 +33,6 @@ currentMonth.innerHTML = `${month}`;
 let calendarDay = currentDate.getDate();
 let currentDateNumber = document.querySelector(".calendar-day");
 currentDateNumber.innerHTML = `${calendarDay}`;
-console.log(calendarDay);
 //Sets the current time
 let hour = currentDate.getHours();
 let minute = currentDate.getMinutes();
@@ -240,14 +239,88 @@ function getMainIcon(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&appid=${apiKey}`;
   axios.get(apiUrl).then(displayMainIcon);
 }
-//5 day forecast
-
+//5 DAY FORECAST TEMPS ONLY
+function displayDay1TempF(response) {
+  let day1TempF = Math.round(response.data.list[0].main.temp);
+  let displayDay1TempF = document.querySelector(".week-temp-1");
+  displayDay1TempF.innerHTML = `${day1TempF}&degF`;
+}
+function getDay1TempF(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#city-name");
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayDay1TempF);
+}
+//
+function displayDay2TempF(response) {
+  let day2TempF = Math.round(response.data.list[2].main.temp);
+  let displayDay2TempF = document.querySelector(".week-temp-2");
+  displayDay2TempF.innerHTML = `${day2TempF}&degF`;
+}
+function getDay2TempF(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#city-name");
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayDay2TempF);
+}
+//
+function displayDay3TempF(response) {
+  let day3TempF = Math.round(response.data.list[10].main.temp);
+  let displayDay3TempF = document.querySelector(".week-temp-3");
+  displayDay3TempF.innerHTML = `${day3TempF}&degF`;
+}
+function getDay3TempF(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#city-name");
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayDay3TempF);
+}
+//
+function displayDay4TempF(response) {
+  let day4TempF = Math.round(response.data.list[18].main.temp);
+  let displayDay4TempF = document.querySelector(".week-temp-4");
+  displayDay4TempF.innerHTML = `${day4TempF}&degF`;
+}
+function getDay4TempF(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#city-name");
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayDay4TempF);
+}
+//
+function displayDay5TempF(response) {
+  let day5TempF = Math.round(response.data.list[26].main.temp);
+  let displayDay5TempF = document.querySelector(".week-temp-5");
+  displayDay5TempF.innerHTML = `${day5TempF}&degF`;
+}
+function getDay5TempF(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#city-name");
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayDay5TempF);
+}
 // Event Listeners <3
 userLocation.addEventListener("submit", search);
 userLocation.addEventListener("submit", getWeatherInfo);
 userLocation.addEventListener("submit", searchF);
 userLocation.addEventListener("submit", getWindSpeed);
 userLocation.addEventListener("submit", getMainIcon);
+userLocation.addEventListener("submit", getDay1TempF);
+userLocation.addEventListener("submit", getDay2TempF);
+userLocation.addEventListener("submit", getDay3TempF);
+userLocation.addEventListener("submit", getDay4TempF);
+userLocation.addEventListener("submit", getDay5TempF);
+
 // Get current temp based on location data
 function displayCurrentTemp(response) {
   let cleanTemp = Math.round(response.data.main.temp);
@@ -282,5 +355,10 @@ function defaultLoad() {
   searchF(dummyEvt);
   getWindSpeed(dummyEvt);
   getMainIcon(dummyEvt);
+  getDay1TempF(dummyEvt);
+  getDay2TempF(dummyEvt);
+  getDay3TempF(dummyEvt);
+  getDay4TempF(dummyEvt);
+  getDay5TempF(dummyEvt);
 }
 window.addEventListener("load", defaultLoad);

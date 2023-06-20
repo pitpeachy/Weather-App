@@ -239,8 +239,121 @@ function getMainIcon(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&appid=${apiKey}`;
   axios.get(apiUrl).then(displayMainIcon);
 }
+// 5 DAY FORECAST DAYS OF THE WEEK
+let shortDaysOfTheWeek = [
+  "Sun",
+  "Mon",
+  "Tue",
+  "Wed",
+  "Thu",
+  "Fri",
+  "Sat",
+  "Sun",
+];
+let day1Future = currentDate.setDate(currentDate.getDate() + 1);
+let day1OfTheWeek = shortDaysOfTheWeek[currentDate.getDay()];
+let day1Week = document.querySelector(".day1");
+day1Week.innerHTML = `${day1OfTheWeek}`;
+//
+let day2Future = currentDate.setDate(currentDate.getDate() + 1);
+let day2OfTheWeek = shortDaysOfTheWeek[currentDate.getDay()];
+let day2Week = document.querySelector(".day2");
+day2Week.innerHTML = `${day2OfTheWeek}`;
+//
+let day3Future = currentDate.setDate(currentDate.getDate() + 1);
+let day3OfTheWeek = shortDaysOfTheWeek[currentDate.getDay()];
+let day3Week = document.querySelector(".day3");
+day3Week.innerHTML = `${day3OfTheWeek}`;
+//
+let day4Future = currentDate.setDate(currentDate.getDate() + 1);
+let day4OfTheWeek = shortDaysOfTheWeek[currentDate.getDay()];
+let day4Week = document.querySelector(".day4");
+day4Week.innerHTML = `${day4OfTheWeek}`;
+//
+let day5Future = currentDate.setDate(currentDate.getDate() + 1);
+let day5OfTheWeek = shortDaysOfTheWeek[currentDate.getDay()];
+let day5Week = document.querySelector(".day5");
+day5Week.innerHTML = `${day5OfTheWeek}`;
+//
+//5 DAY FORECAST ICONS ONLY
+function displayDay1Icon(response) {
+  console.log(response.data.list[0].weather[0].description);
+  let svgkey = getsvgkey(response.data.list[0].weather[0].description);
+  const svgcontent = getsvgcontent(svgkey);
+  let day1Icon = document.querySelector(".day1-icon-container");
+  day1Icon.innerHTML = svgcontent;
+}
+function getDay1Icon(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#city-name");
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayDay1Icon);
+}
+//
+function displayDay2Icon(response) {
+  console.log(response.data.list[2].weather[0].description);
+  let svgkey = getsvgkey(response.data.list[2].weather[0].description);
+  const svgcontent = getsvgcontent(svgkey);
+  let day2Icon = document.querySelector(".day2-icon-container");
+  day2Icon.innerHTML = svgcontent;
+}
+function getDay2Icon(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#city-name");
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayDay2Icon);
+}
+//
+function displayDay3Icon(response) {
+  console.log(response.data.list[10].weather[0].description);
+  let svgkey = getsvgkey(response.data.list[10].weather[0].description);
+  const svgcontent = getsvgcontent(svgkey);
+  let day3Icon = document.querySelector(".day3-icon-container");
+  day3Icon.innerHTML = svgcontent;
+}
+function getDay3Icon(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#city-name");
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayDay3Icon);
+}
+//
+function displayDay4Icon(response) {
+  console.log(response.data.list[18].weather[0].description);
+  let svgkey = getsvgkey(response.data.list[18].weather[0].description);
+  const svgcontent = getsvgcontent(svgkey);
+  let day4Icon = document.querySelector(".day4-icon-container");
+  day4Icon.innerHTML = svgcontent;
+}
+function getDay4Icon(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#city-name");
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayDay4Icon);
+}
+//
+function displayDay5Icon(response) {
+  console.log(response.data.list[26].weather[0].description);
+  let svgkey = getsvgkey(response.data.list[26].weather[0].description);
+  const svgcontent = getsvgcontent(svgkey);
+  let day5Icon = document.querySelector(".day5-icon-container");
+  day5Icon.innerHTML = svgcontent;
+}
+function getDay5Icon(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#city-name");
+  let apiKey = "3998b1623f24f3250ddc0fe708c716d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayDay5Icon);
+}
+//
 //5 DAY FORECAST TEMPS ONLY
 function displayDay1TempF(response) {
+  console.log(response);
   let day1TempF = Math.round(response.data.list[0].main.temp);
   let displayDay1TempF = document.querySelector(".week-temp-1");
   displayDay1TempF.innerHTML = `${day1TempF}&degF`;
@@ -320,6 +433,11 @@ userLocation.addEventListener("submit", getDay2TempF);
 userLocation.addEventListener("submit", getDay3TempF);
 userLocation.addEventListener("submit", getDay4TempF);
 userLocation.addEventListener("submit", getDay5TempF);
+userLocation.addEventListener("submit", getDay1Icon);
+userLocation.addEventListener("submit", getDay2Icon);
+userLocation.addEventListener("submit", getDay3Icon);
+userLocation.addEventListener("submit", getDay4Icon);
+userLocation.addEventListener("submit", getDay5Icon);
 
 // Get current temp based on location data
 function displayCurrentTemp(response) {
@@ -345,6 +463,7 @@ function getCurrentPosition(event) {
 }
 let button = document.querySelector("button");
 button.addEventListener("click", getCurrentPosition);
+
 // Default Data
 function defaultLoad() {
   let dummyEvt = new Event("submit");
@@ -360,5 +479,10 @@ function defaultLoad() {
   getDay3TempF(dummyEvt);
   getDay4TempF(dummyEvt);
   getDay5TempF(dummyEvt);
+  getDay1Icon(dummyEvt);
+  getDay2Icon(dummyEvt);
+  getDay3Icon(dummyEvt);
+  getDay4Icon(dummyEvt);
+  getDay5Icon(dummyEvt);
 }
 window.addEventListener("load", defaultLoad);

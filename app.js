@@ -277,7 +277,6 @@ day5Week.innerHTML = `${day5OfTheWeek}`;
 //
 //5 DAY FORECAST ICONS ONLY
 function displayDay1Icon(response) {
-  console.log(response.data.list[0].weather[0].description);
   let svgkey = getsvgkey(response.data.list[0].weather[0].description);
   const svgcontent = getsvgcontent(svgkey);
   let day1Icon = document.querySelector(".day1-icon-container");
@@ -292,7 +291,6 @@ function getDay1Icon(event) {
 }
 //
 function displayDay2Icon(response) {
-  console.log(response.data.list[2].weather[0].description);
   let svgkey = getsvgkey(response.data.list[2].weather[0].description);
   const svgcontent = getsvgcontent(svgkey);
   let day2Icon = document.querySelector(".day2-icon-container");
@@ -307,7 +305,6 @@ function getDay2Icon(event) {
 }
 //
 function displayDay3Icon(response) {
-  console.log(response.data.list[10].weather[0].description);
   let svgkey = getsvgkey(response.data.list[10].weather[0].description);
   const svgcontent = getsvgcontent(svgkey);
   let day3Icon = document.querySelector(".day3-icon-container");
@@ -322,7 +319,6 @@ function getDay3Icon(event) {
 }
 //
 function displayDay4Icon(response) {
-  console.log(response.data.list[18].weather[0].description);
   let svgkey = getsvgkey(response.data.list[18].weather[0].description);
   const svgcontent = getsvgcontent(svgkey);
   let day4Icon = document.querySelector(".day4-icon-container");
@@ -337,7 +333,6 @@ function getDay4Icon(event) {
 }
 //
 function displayDay5Icon(response) {
-  console.log(response.data.list[26].weather[0].description);
   let svgkey = getsvgkey(response.data.list[26].weather[0].description);
   const svgcontent = getsvgcontent(svgkey);
   let day5Icon = document.querySelector(".day5-icon-container");
@@ -353,7 +348,6 @@ function getDay5Icon(event) {
 //
 //5 DAY FORECAST TEMPS ONLY
 function displayDay1TempF(response) {
-  console.log(response);
   let day1TempF = Math.round(response.data.list[0].main.temp);
   let displayDay1TempF = document.querySelector(".week-temp-1");
   displayDay1TempF.innerHTML = `${day1TempF}&degF`;

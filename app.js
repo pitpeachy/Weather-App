@@ -240,6 +240,7 @@ function getMainIcon(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&appid=${apiKey}`;
   axios.get(apiUrl).then(displayMainIcon);
 }
+//5 day forecast
 
 // Event Listeners <3
 userLocation.addEventListener("submit", search);
